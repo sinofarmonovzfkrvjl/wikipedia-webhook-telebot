@@ -22,7 +22,3 @@ def echo(message: types.Message):
         bot.send_message(message.chat.id, wikipedia.summary(message.text))
     except:
         bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate("Bu mavzuga oid maqola topaolmadim"))
-
-
-print(f"[@{bot.get_me().username}] id={bot.get_me().id} {bot.get_me().full_name}")
-bot.infinity_polling(skip_pending=True, timeout=False, logger_level=logging.INFO, long_polling_timeout=False)
