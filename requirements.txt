@@ -1,0 +1,4 @@
+pytelegrambotapi
+flask
+wikipedia
+deep_translator
