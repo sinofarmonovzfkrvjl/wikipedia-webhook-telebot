@@ -2,13 +2,13 @@ from telebot import TeleBot, types
 import wikipedia
 from deep_translator import GoogleTranslator
 
-API_TOKEN = "7257169762:AAFKf38iie-TiO3MfgKCX6bjHgOgPkWYZNA"
+API_TOKEN = "7257169762:AAEHq_ki3WaO3L09UGcHx7mPUIb4eVwoaiA"
 
 bot = TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=["start"])
 def start(message: types.Message):
-    bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate(f"Salom {message.from_user.full_name}"))
+    bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate(f"Salom {message.from_user.full_name} men wikipedia botman"))
 
 @bot.message_handler(commands=['uz'])
 def uz(message: types.Message):
@@ -34,4 +34,5 @@ def echo(message: types.Message):
 
 
 if __name__ == "__main__":
+    bot.delete_webhook()
     bot.polling()
