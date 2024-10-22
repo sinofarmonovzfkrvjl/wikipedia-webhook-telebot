@@ -1,5 +1,4 @@
 from telebot import TeleBot, types
-import logging
 import wikipedia
 from deep_translator import GoogleTranslator
 
@@ -11,10 +10,20 @@ bot = TeleBot(API_TOKEN)
 def start(message: types.Message):
     bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate(f"Salom {message.from_user.full_name}"))
 
-@bot.message_handler(func=lambda message: message.text.startswith("/"))
-def change_lang(message: types.Message):
-    wikipedia.set_lang(message.text[1:])
-    bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate("Til o'zgartirildi") + " to " + message.text[1:])
+@bot.message_handler(commands=['uz'])
+def uz(message: types.Message):
+    wikipedia.set_lang('uz')
+    bot.send_message(message.chat.id, "Til o'zgartirildi")
+
+@bot.message_handler(commands=['ru'])
+def ru(message: types.Message):
+    wikipedia.set_lang('ru')
+    bot.send_message(message.chat.id, "Язык изменен")
+
+@bot.message_handler(commands=['en'])
+def en(message: types.Message):
+    wikipedia.set_lang('en')
+    bot.send_message(message.chat.id, "Language changed")
 
 @bot.message_handler()
 def echo(message: types.Message):
@@ -22,3 +31,7 @@ def echo(message: types.Message):
         bot.send_message(message.chat.id, wikipedia.summary(message.text))
     except:
         bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate("Bu mavzuga oid maqola topaolmadim"))
+
+
+if __name__ == "__main__":
+    bot.polling()
