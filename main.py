@@ -8,7 +8,12 @@ bot = TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=["start"])
 def start(message: types.Message):
-    bot.send_message(message.chat.id, GoogleTranslator(target=message.from_user.language_code).translate(f"Salom {message.from_user.full_name} men wikipedia botman"))
+    if message.from_user.language_code == "uz":
+        bot.send_message(message.chat.id, f'Salom {message.from_user.full_name}\nmen wikipedia botman')
+    elif message.from_user.language_code == "ru":
+        bot.send_message(message.chat.id, f'Здравствуйте {message.from_user.full_name}\nменя Wikipedia бот')
+    else:
+        bot.send_message(message.chat.id, f'Hello {message.from_user.full_name}\nI am Wikipedia bot')
 
 @bot.message_handler(commands=['uz'])
 def uz(message: types.Message):
