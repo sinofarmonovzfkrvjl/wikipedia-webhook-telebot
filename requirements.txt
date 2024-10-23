@@ -1,3 +1,4 @@
 pytelegrambotapi
 wikipedia
 deep_translator
+flask
