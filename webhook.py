@@ -4,7 +4,7 @@ import requests
 from flask import Flask, request
 from main import bot, API_TOKEN, types  # Import the function to process updates
 
-# WEBHOOK_URL = "https://wikipedia-webhook-telebot.onrender.com/webhook"  # Replace with your ngrok URL
+WEBHOOK_URL = "https://wikipedia-webhook-telebot.onrender.com/webhook"  # Replace with your ngrok URL
 
 # Set up Flask app
 app = Flask(__name__)
@@ -26,10 +26,10 @@ def index():
 # Set the webhook
 def set_webhook():
     url = f"https://api.telegram.org/bot{API_TOKEN}/setWebhook"
-    # payload = {"url": WEBHOOK_URL}
-    # response = requests.post(url, json=payload)
-    # print(response.json())  # Print the response for debugging
+    payload = {"url": WEBHOOK_URL}
+    response = requests.post(url, json=payload)
+    print(response.json())  # Print the response for debugging
 
-# if __name__ == '__main__':
-    # set_webhook()  # Set the webhook when the script runs
-    # app.run(host='0.0.0.0', port=8480)  # Change the port if needed
+if __name__ == '__main__':
+    set_webhook()  # Set the webhook when the script runs
+    app.run(host='0.0.0.0', port=8480)  # Change the port if needed
